@@ -22,7 +22,9 @@ export default (state = initialState, action) => {
       const updatedState = _.cloneDeep(state);
       return Object.assign(updatedState, {
         rolling: false,
-        rolls: [action.number].concat(state.rolls),
+        rolls: [{
+          ...action,
+        }].concat(state.rolls),
       });
     }
     default:

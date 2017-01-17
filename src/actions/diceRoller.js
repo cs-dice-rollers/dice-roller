@@ -1,3 +1,4 @@
+import moment from 'moment';
 import {
   ROLLING_DICE,
   DICE_ROLLED,
@@ -9,10 +10,12 @@ export function rollingDice() {
   };
 }
 
-export function diceRolled(number) {
+export function diceRolled({ roll, timestamp, dieType }) {
   return {
     type: DICE_ROLLED,
-    number,
+    roll,
+    timestamp,
+    dieType,
   };
 }
 
@@ -42,8 +45,11 @@ export function rollDice() {
     })
     .then(response => response.json())
     .then((response) => {
-      dispatch(diceRolled(response.result.random.data[0]));
-      // console.log('RESPONSE', response.result.random.data);
+      dispatch(diceRolled({
+        roll: response.result.random.data[0],
+        timestamp: moment().valueOf(),
+        dieType: 'd20',
+      }));
     });
   };
 }

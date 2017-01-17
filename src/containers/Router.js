@@ -13,7 +13,7 @@ const { CardStack } = NavigationExperimental;
 )
 export default class Router extends Component {
   static propTypes = {
-    routes: PropTypes.shapeOf(),
+    routes: PropTypes.shape(),
     dispatch: PropTypes.func.isRequired,
   };
 
