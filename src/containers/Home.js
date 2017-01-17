@@ -3,9 +3,12 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableOpacity,
   TouchableHighlight,
 } from 'react-native';
+
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { rollDice } from '../actions/diceRoller';
 
 const styles = StyleSheet.create({
   container: {
@@ -41,43 +44,17 @@ const styles = StyleSheet.create({
   }
 });
 
+@connect(
+  state => ({
+    dice: state.dice
+  }),
+  dispatch => bindActionCreators({ rollDice }, dispatch)
+)
 export default class Home extends Component {
   static propTypes = {
-    navigate: PropTypes.func.isRequired
+    navigate: PropTypes.func.isRequired,
+    dice: PropTypes.any,
   };
-
-  componentWillMount() {
-    this.rollDice();
-  }
-
-  rollDice = () => {
-    // Move this into an action thingamajig
-
-    const payloadBody = {
-      method: 'generateIntegers',
-      jsonrpc: '2.0',
-      params: {
-        apiKey: '5047c35e-b0ac-4666-8619-1fad7327e727',
-        n: 2,
-        min: 1,
-        max: 20
-      },
-      id: 1,
-    };
-
-    fetch('https://api.random.org/json-rpc/1/invoke', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(payloadBody)
-    })
-    .then(response => response.json())
-    .then((response) => {
-      console.log('RESPONSE', response.result.random.data);
-    });
-  }
 
   toHistory = () => {
     const { navigate } = this.props;
@@ -87,27 +64,20 @@ export default class Home extends Component {
     });
   }
 
-  toCounter = () => {
-    const { navigate } = this.props;
-    navigate({
-      type: 'push',
-      key: 'counter'
-    });
-  }
-
   render() {
     return (
       <View style={styles.container}>
         <View style={styles.content}>
           <Text style={styles.welcome}>
             Roll your dice!
+            {this.props.dice.rolls}
           </Text>
         </View>
 
         <View style={styles.navigation}>
           <View style={styles.navItem}>
             <TouchableHighlight
-              style={styles.button} onPress={this.toCounter} underlayColor={'#f0f0f0'}
+              style={styles.button} onPress={this.rollDice} underlayColor={'#f0f0f0'}
             >
               <Text style={styles.navText}>Roll</Text>
             </TouchableHighlight>
