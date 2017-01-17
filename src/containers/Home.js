@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
+import RNShakeEvent from 'react-native-shake-event';
 import {
   StyleSheet,
   Text,
-  Vibration,
   View,
   TouchableHighlight,
 } from 'react-native';
@@ -65,6 +65,16 @@ export default class Home extends Component {
     rollDice: PropTypes.func.isRequired,
   };
 
+  componentWillMount() {
+    RNShakeEvent.addEventListener('shake', () => {
+      this.rollDice();
+    });
+  }
+
+  componentWillUnmount() {
+    RNShakeEvent.removeEventListener('shake');
+  }
+
   toHistory = () => {
     const { navigate } = this.props;
     navigate({
@@ -74,7 +84,6 @@ export default class Home extends Component {
   }
 
   rollDice = () => {
-    Vibration.vibrate();
     this.props.rollDice();
   }
 

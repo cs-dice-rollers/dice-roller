@@ -1,4 +1,6 @@
 import moment from 'moment';
+import { Vibration } from 'react-native';
+
 import {
   ROLLING_DICE,
   DICE_ROLLED,
@@ -45,6 +47,7 @@ export function rollDice() {
     })
     .then(response => response.json())
     .then((response) => {
+      Vibration.vibrate();
       dispatch(diceRolled({
         roll: response.result.random.data[0],
         timestamp: moment().valueOf(),
