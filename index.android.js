@@ -12,20 +12,13 @@ import {
   View
 } from 'react-native';
 
+import App from './app/containers/app.container';
+
 export default class rNative extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome the first annual CogScale React Native HACKATHON!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.android.js
-        </Text>
-        <Text style={styles.instructions}>
-          Double tap R on your keyboard to reload,{'\n'}
-          Shake or press menu button for dev menu
-        </Text>
+        <App />
       </View>
     );
   }
