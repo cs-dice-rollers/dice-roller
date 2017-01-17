@@ -3,26 +3,42 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableOpacity
+  TouchableOpacity,
+  TouchableHighlight,
 } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
+  },
+  content: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   welcome: {
     fontSize: 20,
     textAlign: 'center',
     margin: 10,
   },
-  instructions: {
+  navItem: {
+    flex: 1,
+  },
+  navText: {
     textAlign: 'center',
     color: '#333333',
-    marginBottom: 5,
   },
+  navigation: {
+    flexDirection: 'row',
+  },
+  button: {
+    backgroundColor: '#f7f7f7',
+    padding: 15,
+  }
 });
 
 export default class Home extends Component {
@@ -53,15 +69,28 @@ export default class Home extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native Boilerplate!
-        </Text>
-        <TouchableOpacity onPress={this.rollDice}>
-          <Text style={styles.instructions}>Navigate to Counter</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={this.toHistory}>
-          <Text style={styles.instructions}>Navigate to History</Text>
-        </TouchableOpacity>
+        <View style={styles.content}>
+          <Text style={styles.welcome}>
+            Roll your dice!
+          </Text>
+        </View>
+
+        <View style={styles.navigation}>
+          <View style={styles.navItem}>
+            <TouchableHighlight
+              style={styles.button} onPress={this.toCounter} underlayColor={'#f0f0f0'}
+            >
+              <Text style={styles.navText}>Roll</Text>
+            </TouchableHighlight>
+          </View>
+          <View style={styles.navItem}>
+            <TouchableHighlight
+              style={styles.button} onPress={this.toHistory} underlayColor={'#f0f0f0'}
+            >
+              <Text style={styles.navText}>History</Text>
+            </TouchableHighlight>
+          </View>
+        </View>
       </View>
     );
   }
