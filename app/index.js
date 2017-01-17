@@ -12,4 +12,4 @@ const RNBoilerplate = () => (
   </Provider>
 );
 
-AppRegistry.registerComponent('RNBoilerplate', () => RNBoilerplate);
+AppRegistry.registerComponent('rNative', () => RNBoilerplate);

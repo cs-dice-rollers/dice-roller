@@ -9,12 +9,12 @@ const { CardStack } = NavigationExperimental;
 
 @connect(
   state => state,
-  dispatch => ({ dispatch })
+  dispatch => ({ dispatch }),
 )
 export default class Router extends Component {
   static propTypes = {
     routes: PropTypes.object.isRequired,
-    dispatch: PropTypes.func.isRequired
+    dispatch: PropTypes.func.isRequired,
   };
 
   handleNavigation = action => {

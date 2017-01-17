@@ -10,3 +10,4 @@ rules:
   import/no-extraneous-dependencies: [2, {}]
   # this rule causes problems when dealing with external objects that contain underscores
   no-underscore-dangle: 0
+  react/jsx-filename-extension: [1, { "extensions": [".js", ".jsx"] }]
