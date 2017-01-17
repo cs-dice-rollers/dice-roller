@@ -60,7 +60,7 @@ export default class Home extends Component {
           <Text style={styles.instructions}>Navigate to Counter</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={this.toHistory}>
-          <Text style={styles.instructions}>Navigate to Counter</Text>
+          <Text style={styles.instructions}>Navigate to History</Text>
         </TouchableOpacity>
       </View>
     );
