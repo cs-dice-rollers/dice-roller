@@ -59,7 +59,7 @@ export default class Home extends Component {
     navigate: PropTypes.func.isRequired,
     dice: PropTypes.shape({
       rolling: PropTypes.bool.isRequired,
-      rolls: PropTypes.arrayOf(PropTypes.number),
+      rolls: PropTypes.arrayOf(PropTypes.shape),
     }),
     rollDice: PropTypes.func.isRequired,
   };
@@ -84,7 +84,7 @@ export default class Home extends Component {
       } else {
         content = (
           <Text style={styles.welcome}>
-            You rolled a <Text style={styles.roll}>{this.props.dice.rolls[0]}</Text>
+            You rolled a <Text style={styles.roll}>{this.props.dice.rolls[0].roll}</Text>
           </Text>
         );
       }
