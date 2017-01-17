@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import {
   StyleSheet,
   Text,
+  Vibration,
   View,
   TouchableHighlight,
 } from 'react-native';
@@ -72,6 +73,11 @@ export default class Home extends Component {
     });
   }
 
+  rollDice = () => {
+    Vibration.vibrate();
+    this.props.rollDice();
+  }
+
   render() {
     let content;
     if (this.props.dice.rolls && this.props.dice.rolls.length > 0) {
@@ -105,7 +111,7 @@ export default class Home extends Component {
         <View style={styles.navigation}>
           <View style={styles.navItem}>
             <TouchableHighlight
-              style={styles.button} onPress={this.props.rollDice} underlayColor={'#f0f0f0'}
+              style={styles.button} onPress={this.rollDice} underlayColor={'#f0f0f0'}
             >
               <Text style={styles.navText}>Roll</Text>
             </TouchableHighlight>
