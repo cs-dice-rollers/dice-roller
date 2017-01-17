@@ -28,6 +28,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     margin: 10,
   },
+  roll: {
+    fontSize: 24,
+    fontWeight: 'bold',
+  },
   navItem: {
     flex: 1,
   },
@@ -41,43 +45,67 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: '#f7f7f7',
     padding: 15,
-  }
+  },
 });
 
 @connect(
   state => ({
-    dice: state.dice
+    dice: state.dice,
   }),
-  dispatch => bindActionCreators({ rollDice }, dispatch)
+  dispatch => bindActionCreators({ rollDice }, dispatch),
 )
 export default class Home extends Component {
   static propTypes = {
     navigate: PropTypes.func.isRequired,
-    dice: PropTypes.any,
+    dice: PropTypes.shape({
+      rolling: PropTypes.bool.isRequired,
+      rolls: PropTypes.arrayOf(PropTypes.number),
+    }),
+    rollDice: PropTypes.func.isRequired,
   };
 
   toHistory = () => {
     const { navigate } = this.props;
     navigate({
       type: 'push',
-      key: 'history'
+      key: 'history',
     });
   }
 
   render() {
+    let content;
+    if (this.props.dice.rolls && this.props.dice.rolls.length > 0) {
+      if (this.props.dice.rolling) {
+        content = (
+          <Text style={styles.welcome}>
+            Rolling...
+          </Text>
+        );
+      } else {
+        content = (
+          <Text style={styles.welcome}>
+            You rolled a <Text style={styles.roll}>{this.props.dice.rolls[0]}</Text>
+          </Text>
+        );
+      }
+    } else {
+      // no dice rolls yet!
+      content = (
+        <Text style={styles.welcome}>
+          Roll your dice!
+        </Text>
+      );
+    }
     return (
       <View style={styles.container}>
         <View style={styles.content}>
-          <Text style={styles.welcome}>
-            Roll your dice!
-            {this.props.dice.rolls}
-          </Text>
+          {content}
         </View>
 
         <View style={styles.navigation}>
           <View style={styles.navItem}>
             <TouchableHighlight
-              style={styles.button} onPress={this.rollDice} underlayColor={'#f0f0f0'}
+              style={styles.button} onPress={this.props.rollDice} underlayColor={'#f0f0f0'}
             >
               <Text style={styles.navText}>Roll</Text>
             </TouchableHighlight>

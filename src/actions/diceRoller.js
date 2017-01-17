@@ -1,12 +1,25 @@
+import {
+  ROLLING_DICE,
+  DICE_ROLLED,
+} from '../constants/action-types';
+
+export function rollingDice() {
+  return {
+    type: ROLLING_DICE,
+  };
+}
+
 export function diceRolled(number) {
   return {
-    type: 'DICE_ROLLED',
+    type: DICE_ROLLED,
     number,
   };
 }
 
 export function rollDice() {
-  return dispatch => {
+  return (dispatch) => {
+    dispatch(rollingDice());
+
     const payloadBody = {
       method: 'generateIntegers',
       jsonrpc: '2.0',
@@ -14,7 +27,7 @@ export function rollDice() {
         apiKey: '5047c35e-b0ac-4666-8619-1fad7327e727',
         n: 2,
         min: 1,
-        max: 20
+        max: 20,
       },
       id: 1,
     };
@@ -25,7 +38,7 @@ export function rollDice() {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(payloadBody)
+      body: JSON.stringify(payloadBody),
     })
     .then(response => response.json())
     .then((response) => {

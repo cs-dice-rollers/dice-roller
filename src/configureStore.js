@@ -5,10 +5,10 @@ import { Platform } from 'react-native';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import reducer from './reducers';
-import * as actionCreators from './actions/counter';
+import * as actionCreators from './actions/diceRoller';
 
 let composeEnhancers = compose;
-if (__DEV__) {
+if (__DEV__) { // eslint-disable-line
   /* eslint import/no-extraneous-dependencies: ["error", {"devDependencies": true}] */
   const installDevTools = require('immutable-devtools');
 
