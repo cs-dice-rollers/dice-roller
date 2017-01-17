@@ -1,0 +1,12 @@
+parser: "babel-eslint"
+extends: "airbnb"
+rules:
+  # this rule causes problems with initialization, nock, and others
+  global-require: 0
+  # this rule causes problems with actions (single action to export)
+  import/prefer-default-export: 0
+  # https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-extraneous-dependencies.md
+  # this rule causes problems with webpack config, nock, and others
+  import/no-extraneous-dependencies: [2, {}]
+  # this rule causes problems when dealing with external objects that contain underscores
+  no-underscore-dangle: 0
